@@ -1,0 +1,10 @@
+https://dl.espressif.com/dl/package_esp32_index.json 
+http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+
+https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+ch340g
+https://sparks.gogo.co.nz/assets/_site_/downloads/CH34x_Install_Windows_v3_4.zip
+cp2102
+https://www.silabs.com/documents/public/software/CP210x_Universal_Windows_Driver.zip
