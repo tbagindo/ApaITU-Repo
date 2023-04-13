@@ -97,6 +97,7 @@ float distanceCM(int triggerPin, int echoPin){
 
   float distance = 0.5 * durationUS(triggerPin,echoPin) * sow;
   Serial.println("Distance : " + String(distance) + " cm");
+  return distance
 }
 
 void loop() {

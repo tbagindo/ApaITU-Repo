@@ -46,6 +46,9 @@
 
 
 #include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+
+ESP8266WebServer server(80);
 
 const char* ssid = "ApaITU";
 const char* pass = "1234567890";
@@ -75,10 +78,21 @@ void setup() {
   Serial.print("WiFi Connected, IP : ");
   Serial.println(WiFi.localIP());
 
+  server.on("/",rootHandler);
+  server.begin();
+
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+  
   
 }
 
+void rootHandler(){
+  server.send(200,"text/plain","webserver");
+}
 void loop() {
+  server.handleClient();
   
 
 }

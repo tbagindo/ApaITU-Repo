@@ -46,6 +46,11 @@
 
 
 #include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+
+ESP8266WebServer server(80);
+
+String page = "<html><body><h1>NodeMCU WiFi & WebServer<h1><p>Duration : @@DURATION@@ us</p><p>Distance : @@DISTANCE@@ cm</P></body></html>";
 
 const char* ssid = "ApaITU";
 const char* pass = "1234567890";
@@ -56,6 +61,10 @@ IPAddress staGW(192,168,2,1);
 IPAddress staDNS(192,168,1,200);
 IPAddress subnet(255,255,255,0);
 
+//pins
+const int trigger = D5;
+const int echo = D6;
+float sow = 0.034; // 0.034 cm/uS
 
 void setup() {
   Serial.begin(115200);
@@ -75,10 +84,26 @@ void setup() {
   Serial.print("WiFi Connected, IP : ");
   Serial.println(WiFi.localIP());
 
+  server.on("/",rootHandler);
+  server.begin();
+
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+
+  pinMode(trigger,OUTPUT);
+  pinMode(echo,INPUT);
   
 }
 
+void rootHandler(){
+  String str = page;
+  str.replace("@@DURATION@@",(String)durationUS(trigger,echo));
+  str.replace("@@DISTANCE@@",(String)distanceCM(trigger,echo));
+  server.send(200,"text/html",str);
+}
 void loop() {
+  server.handleClient();
   
 
 }
