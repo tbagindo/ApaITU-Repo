@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/tank.css">
+	</head>
+  <body>
+    <h3>ApaITU WaterTank</h3>
+    <div id="tank" class="tk">
+		<div id="level" class="lq" style="height : 40%">
+			<div id="ring" class="ring" style="height : 40%"></div>
+		</div>
+		<span id="percent" class="text">90%</span>
+	</div>
+	<br>
+    <input type="range" id="rangeLevel" min="0" max="100" step="2" onchange="drawTank(this.value)">
+  </body>
+  <script src="/tank.js"></script>
+</html>

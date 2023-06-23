@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<link rel="stylesheet" type="text/css" href="/index.css">
+  </head>
+  <body>
+    <h1>NodeMCU WaterTank Monitoring</h1>
+	    <div id="tank" class="tk">
+		<div id="level" class="lq" style="height : 40%">
+			<div id="ring" class="ring" style="height : 40%"></div>
+		</div>
+		<span id="percent" class="text">90%</span>
+	</div>
+	<br>
+    <table align="center">
+      <tr>
+        <td width="100px">rawDist</td>
+        <td width="20px">:</td> 
+        <td width="80px"><span id='rawDist'></span></td>
+        <td width="100px"> cm</td>
+      </tr>
+      <tr>
+        <td>Distance</td>
+        <td>:</td> 
+        <td><span id='distance'></span></td>
+        <td> cm</td>
+      </tr> 
+      <tr>
+        <td>Water Level</td>
+        <td>:</td> 
+        <td><span id='waterLevel'></span></td>
+        <td> cm</td>
+      </tr>
+      <tr>
+        <td>Tank Volume</td>
+        <td>:</td> 
+        <td><span id='volume'></span></td>
+        <td> L</td>
+      </tr>
+      <tr>
+        <td>Volume</td>
+        <td>:</td> 
+        <td><span id='percentage'></span></td>
+        <td> %</td>
+      </tr>
+      <tr>
+        <td>RelayState1</td>
+        <td>:</td> 
+        <td><span id='relay1'></span></td>
+        <td><button id='r1btn' onclick="btnClick('relay1','r1btn','1')" style="background-color: lightgreen; height: 25px; width: 100px"> - </button></td>
+      </tr>
+      <tr>
+        <td>RelayState2</td>
+        <td>:</td> 
+        <td><span id='relay2'></span></td>
+        <td><button id='r2btn' onclick="btnClick('relay2','r2btn','2')" style="background-color: lightgreen; height: 25px; width: 100px"> - </button></td>
+      </tr>
+      <tr>
+        <td>Pump Mode</td>
+        <td>:</td> 
+        <td><span id='mode'></span></td>
+        <td><button id='mbtn' onclick="modeClick()" style="background-color: lightgreen; height: 25px; width: 100px">Automatic</button></td>
+      </tr>  
+  </body>
+  <script src="/index.js"></script>
+</html>
