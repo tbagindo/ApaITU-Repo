@@ -13,9 +13,6 @@
 AccelStepper stepper(1, PULSPIN, DIRPIN);
 
 
-
-
-
 ESP8266WebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
 
@@ -77,7 +74,7 @@ void loop(){
   webSocket.loop();
   serialHandler();
   motorHandler();
-  if(millis()-pMillis>200){
+  if(millis()-pMillis>600){
       sendWsData();
       pMillis=millis();
   }
