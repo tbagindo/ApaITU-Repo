@@ -4,6 +4,7 @@
  */
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
+#include <WiFiClient.h>
 
 IPAddress staIP(192,168,2,25);
 IPAddress gw(192,168,2,1);
@@ -26,8 +27,9 @@ void setup() {
 
 void loop() {
   if(WiFi.status() == WL_CONNECTED){
+    WiFiClient client;
     HTTPClient http;
-    http.begin("http://192.168.2.24/pumpON");
+    http.begin(client, "http://192.168.2.24/pumpON");
     int httpCode = http.GET();
     if(httpCode>0){
       String payload = http.getString();
