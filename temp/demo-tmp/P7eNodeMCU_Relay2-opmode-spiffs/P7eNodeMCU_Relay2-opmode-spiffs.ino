@@ -67,7 +67,7 @@ const char* ssid = "mktApaITU";
 const char* pass = "1234567890";
 
 IPAddress staIP(192,168,1,23);
-IPAddress staGW(192,168,1,1);
+IPAddress staGW(192,168,1,200);
 IPAddress staDNS(192,168,1,200);
 IPAddress subnet(255,255,255,0);
 
@@ -98,7 +98,7 @@ unsigned long pMillis2 =0;
 const uint32_t dataInterval  = 400;
 const uint32_t sensorInterval = 600;
 
-int offLimit=87;
+int offLimit=92;
 int onLimit=60;
 
 int  counter;
@@ -110,7 +110,7 @@ int R2State = 0;
 //opMode
 int pMode = 0; // 0 - manual , 1 - automatic
 int minThreshold = 70;
-int maxThreshold = 90;
+int maxThreshold = 95;
 int pState;
 String page = FPSTR(MAIN_PAGE);
 
@@ -158,6 +158,7 @@ void setup() {
   server.on("/restart",restartHandler);
   server.on("/fname",fileHandler);
   server.on("/pumpON",pumpON);
+  server.on("/pumpTGL",pumpToggle);
   server.begin();
 
   Serial.print("http://");
@@ -172,10 +173,16 @@ void setup() {
   
 }
 
+void pumpToggle(){
+  R1State = !R1State;
+  digitalWrite(Relay1,!R1State);
+  server.send(200,"text/plain","OK");
+}
+
 void pumpON(){
   R1State =  1;
   digitalWrite(Relay1,!R1State);
-  server.send(200,"text/plain","ON");
+  server.send(200,"text/plain","OK");
 }
 
 void fileHandler(){
@@ -276,7 +283,7 @@ void loop() {
   webSocket.loop();
   ArduinoOTA.handle();
 
-  if(millis()-pMillis>600){ // 5000 milli seconds
+  if(millis()-pMillis>1000){ // 5000 milli seconds
       pMillis = millis();
       sendServerData();
   }

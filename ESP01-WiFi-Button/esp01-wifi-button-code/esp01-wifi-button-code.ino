@@ -29,8 +29,9 @@ void loop() {
   if(WiFi.status() == WL_CONNECTED){
     WiFiClient client;
     HTTPClient http;
-    http.begin(client, "http://192.168.2.24/pumpON");
+    http.begin(client, "http://192.168.1.23/pumpON");
     int httpCode = http.GET();
+    Serial.println("HTTP-GET - httpCode :" + String(httpCode));
     if(httpCode>0){
       String payload = http.getString();
       if(payload  == "ON"){
@@ -40,4 +41,5 @@ void loop() {
       }
     }
   }
+  delay(1000);
 }

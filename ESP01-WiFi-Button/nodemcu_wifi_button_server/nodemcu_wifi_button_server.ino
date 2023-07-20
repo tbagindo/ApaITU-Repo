@@ -39,6 +39,7 @@ int counter = 0;
 
 void setup(){
     Serial.begin(115200);
+    Serial.println();
     pinMode(PUMP,OUTPUT);
     digitalWrite(PUMP, !pState);
     WiFi.config(staIP,gw,mask,dns);
@@ -47,6 +48,7 @@ void setup(){
         Serial.print(".");
         delay(1000);
     }
+    Serial.println();
     server.on("/",indexHandler);
     server.on("/pState",pumpState);
     server.on("/pumpON",pumpON);
@@ -78,7 +80,7 @@ void pumpState(){
 void pumpON(){
     pState = 1;
     digitalWrite(PUMP,!pState);
-    server.send(200,"text/plain","ON");
+    server.send(200,"text/plain","OK");
     Serial.println("/pumpaON");
 }
 
@@ -97,7 +99,7 @@ void loop(){
                 cFlag = true;  
             }
             counter++;      
-            if(counter>6){
+            if(counter>3){
                 counter = 0;
                 pState = 0;
                 digitalWrite(PUMP,!pState);
